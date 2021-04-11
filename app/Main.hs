@@ -50,13 +50,3 @@ main = do
     case wsAddress $ head args of
         Left err -> print err
         Right (addr, port, path) -> withSocketsDo $ WS.runClient addr port path app
-            
-    
-
-
-    -- let
-    --     addr = head args
-    --     port = read (args!!1)::Int
-    --     route = args!!2
-    -- -- eg. "127.0.0.1" 8123 "/middleware"
-    -- withSocketsDo $ WS.runClient addr port route app

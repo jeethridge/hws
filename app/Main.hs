@@ -46,7 +46,8 @@ app conn = do
 -- < Hello
 main :: IO ()
 main = do
-    args <- getArgs
-    case wsAddress $ head args of
-        Left err -> print err
-        Right (addr, port, path) -> withSocketsDo $ WS.runClient addr port path app
+    args <-  getArgs 
+    let uriStr = head args
+    case wsAddress $ uriStr of
+        Nothing -> print $ "Bad URI: " <> uriStr
+        Just (addr, port, path) -> withSocketsDo $ WS.runClient addr port path app

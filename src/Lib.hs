@@ -10,13 +10,13 @@ type Path = String
 type ErrorMsg = String
 
 parsePort :: URIAuth -> Port
-parsePort p = (read . tail . uriPort) p
+parsePort = read . tail . uriPort
 
 wsAddress :: String -> Maybe (Host, Port, Path)
-wsAddress uriStr = do
+wsAddress uriStr =
     case parseURI uriStr of
         Nothing -> Nothing
-        Just uri -> do
+        Just uri ->
             case uriAuthority uri of
                 Nothing -> Nothing
                 Just au -> Just (uriRegName au, parsePort au, uriPath uri)
